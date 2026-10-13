@@ -1,0 +1,6 @@
+/**
+ * Employee
+ */
+public class Employee {
+
+}
