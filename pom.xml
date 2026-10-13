@@ -29,6 +29,14 @@
   </dependencyManagement>
 
   <dependencies>
+<!-- Source: https://mvnrepository.com/artifact/org.springframework/spring-core -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-core</artifactId>
+    <version>7.1.0-M2</version>
+    <scope>compile</scope>
+</dependency>
+<!-- -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
