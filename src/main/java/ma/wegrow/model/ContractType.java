@@ -1,3 +1,5 @@
+package ma.wegrow.model;
+
 /**
  * ContractType
  */
