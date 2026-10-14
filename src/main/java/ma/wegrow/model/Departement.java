@@ -1,10 +1,13 @@
+package ma.wegrow.model;
+
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,4 +28,7 @@ public class Departement {
   private Long id;
   private String nom;
   private String description;
+
+  @OneToMany(mappedBy = "departement")
+  private List<Employee> employees = new ArrayList<>();
 }
