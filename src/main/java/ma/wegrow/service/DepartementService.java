@@ -18,7 +18,7 @@ public class DepartementService {
   }
 
   private void listDepartements(Departement departement) {
-    dRepository.save(departement);
+    dRepository.findAllWithEmployeeCount();
   }
 
 }
