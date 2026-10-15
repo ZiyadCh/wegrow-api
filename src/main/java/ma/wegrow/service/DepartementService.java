@@ -4,20 +4,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import jakarta.transaction.Transactional;
 import lombok.NoArgsConstructor;
-
-import java.util.Map;
-import java.util.List;
-
 import ma.wegrow.model.Departement;
 import ma.wegrow.repository.DepartementRepository;
 
 /**
  * DepartementService
  */
-@NoArgsConstructor
 public class DepartementService {
-  @Autowired
-  private DepartementRepository dRepository;
+  private final DepartementRepository dRepository;
+
+  public DepartementService(DepartementRepository dRepository) {
+    this.dRepository = dRepository;
+  }
 
   @Transactional
   private void createDepartement(Departement departement) {

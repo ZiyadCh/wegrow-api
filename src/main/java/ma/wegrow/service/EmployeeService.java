@@ -14,8 +14,11 @@ import ma.wegrow.repository.EmployeeRepository;
  */
 @Service
 public class EmployeeService {
-  @Autowired
-  private EmployeeRepository employeeRepository;
+  private final EmployeeRepository employeeRepository;
+
+  public EmployeeService(EmployeeRepository employeeRepository) {
+    this.employeeRepository = employeeRepository;
+  }
 
   @Transactional
   public void createEmployee(Employee employee) {
