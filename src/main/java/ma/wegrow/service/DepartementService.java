@@ -2,6 +2,12 @@ package ma.wegrow.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import jakarta.transaction.Transactional;
+
+import java.util.Map;
+import java.util.List;
+
+import ma.wegrow.model.Departement;
 import ma.wegrow.repository.DepartementRepository;
 
 /**
@@ -9,9 +15,11 @@ import ma.wegrow.repository.DepartementRepository;
  */
 public class DepartementService {
   @Autowired
-  private DepartementRepository departementRepository;
+  private DepartementRepository dRepository;
 
-  public Map<Departement, Integer> listDepartementWithEmployees() {
-    return null;
+  @Transactional
+  private void createDepartement(Departement departement) {
+    dRepository.save(departement);
   }
+
 }
