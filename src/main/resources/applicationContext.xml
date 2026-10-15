@@ -4,19 +4,17 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
        xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="
          http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
          http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
          http://www.springframework.org/schema/data/jpa https://www.springframework.org/schema/data/jpa/spring-jpa.xsd
-         http://www.springframework.org/schema/tx https://www.springframework.org/schema/tx/spring-tx.xsd">
+         http://www.springframework.org/schema/tx https://www.springframework.org/schema/tx/spring-tx.xsd
+         http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
 
-    <!-- enables @Autowired / @PersistenceContext support -->
-    <context:annotation-config/>
-
-    <!-- load values from database.properties, usable as ${...} -->
     <context:property-placeholder location="classpath:database.properties"/>
 
-    <!-- 1. DataSource -->
+    <!-- DataSource -->
     <bean id="dataSource"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="${db.driver}"/>
@@ -25,7 +23,7 @@
         <property name="password" value="${db.password}"/>
     </bean>
 
-    <!-- 2. JPA / Hibernate -->
+    <!-- JPA -->
     <bean id="entityManagerFactory"
           class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource"/>
@@ -41,14 +39,41 @@
             </props>
         </property>
     </bean>
+    <!-- -->
 
-    <!-- 3. Transactions -->
+    <!-- transactions -->
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
-    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="create*" propagation="REQUIRED"/>
+            <tx:method name="update*" propagation="REQUIRED"/>
+            <tx:method name="delete*" propagation="REQUIRED"/>
+            <tx:method name="list*"   read-only="true"/>
+            <tx:method name="get*"    read-only="true"/>
+            <tx:method name="*"       propagation="REQUIRED"/>
+        </tx:attributes>
+    </tx:advice>
+    <!-- -->
 
-    <!-- 4. Spring Data repositories -->
+    <aop:config>
+        <aop:pointcut id="serviceMethods"
+                      expression="execution(* ma.wegrow.service.*.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethods"/>
+    </aop:config>
+
+    <!-- scan repos -->
     <jpa:repositories base-package="ma.wegrow.repository"/>
+
+    <!-- scan service -->
+    <bean id="employeeService" class="ma.wegrow.service.EmployeeService">
+        <constructor-arg ref="employeeRepository"/>
+        <constructor-arg ref="departementRepository"/>
+    </bean>
+
+    <bean id="departementService" class="ma.wegrow.service.DepartementService">
+        <constructor-arg ref="departementRepository"/>
+    </bean>
 
 </beans>
