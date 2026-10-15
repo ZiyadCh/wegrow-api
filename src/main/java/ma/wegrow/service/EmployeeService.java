@@ -14,7 +14,6 @@ public class EmployeeService {
     this.employeeRepository = employeeRepository;
   }
 
-  @Transactional
   public void createEmployee(Employee employee) {
     employeeRepository.save(employee);
   }

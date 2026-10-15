@@ -14,7 +14,6 @@ public class DepartementService {
     this.dRepository = dRepository;
   }
 
-  @Transactional
   private void createDepartement(Departement departement) {
     dRepository.save(departement);
   }
