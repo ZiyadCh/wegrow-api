@@ -1,6 +1,5 @@
 package ma.wegrow.service;
 
-import jakarta.transaction.Transactional;
 import ma.wegrow.model.Departement;
 import ma.wegrow.repository.DepartementRepository;
 
