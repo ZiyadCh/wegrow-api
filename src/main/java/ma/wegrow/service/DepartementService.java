@@ -21,4 +21,8 @@ public class DepartementService {
     dRepository.findAllWithEmployeeCount();
   }
 
+  public void deleteDepartement(Long departementId) {
+    dRepository.deleteById(departementId);
+  }
+
 }

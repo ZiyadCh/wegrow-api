@@ -69,6 +69,7 @@
     <!-- scan service -->
     <bean id="employeeService" class="ma.wegrow.service.EmployeeService">
         <constructor-arg ref="employeeRepository"/>
+        <constructor-arg ref="departementRepository"/>
     </bean>
 
     <bean id="departementService" class="ma.wegrow.service.DepartementService">
