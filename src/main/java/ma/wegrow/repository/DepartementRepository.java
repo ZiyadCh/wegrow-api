@@ -12,11 +12,6 @@ import ma.wegrow.model.Departement;
  */
 public interface DepartementRepository extends JpaRepository<Departement, Long> {
 
-  @Query("""
-      select d.id, d.nom, d.description, count(e)
-      from Departement d
-      left join d.employees e
-      group by d.id, d.nom, d.description
-      """)
+  @Query("select d.id, d.nom, d.description, count(e) from Departement d left join d.employees e group by d.id, d.nom, d.description")
   List<Object[]> findAllWithEmployeeCount();
 }
