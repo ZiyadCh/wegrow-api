@@ -1,5 +1,6 @@
 package ma.wegrow.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import ma.wegrow.model.Departement;
@@ -19,8 +20,8 @@ public class DepartementService {
     dRepository.save(departement);
   }
 
-  private void listDepartements(Departement departement) {
-    dRepository.findAllWithEmployeeCount();
+  private List<Object[]> listDepartements(Departement departement) {
+    return dRepository.findAllWithEmployeeCount();
   }
 
   public void deleteDepartement(Long departementId) {
