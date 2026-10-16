@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import ma.wegrow.dto.DepartementDto;
 import ma.wegrow.service.DepartementService;
 
 /**
@@ -21,7 +22,7 @@ class DepartementController {
   }
 
   @GetMapping()
-  public List<Object[]> lisltDepartements() {
+  public List<DepartementDto> lisltDepartements() {
     return dService.listDepartements();
   }
 

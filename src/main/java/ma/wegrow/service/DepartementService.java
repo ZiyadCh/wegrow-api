@@ -3,6 +3,7 @@ package ma.wegrow.service;
 import java.util.List;
 import java.util.Optional;
 
+import ma.wegrow.dto.DepartementDto;
 import ma.wegrow.model.Departement;
 import ma.wegrow.repository.DepartementRepository;
 
@@ -20,7 +21,7 @@ public class DepartementService {
     dRepository.save(departement);
   }
 
-  public List<Object[]> listDepartements() {
+  public List<DepartementDto> listDepartements() {
     return dRepository.findAllWithEmployeeCount();
   }
 
