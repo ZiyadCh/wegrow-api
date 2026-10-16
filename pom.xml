@@ -44,6 +44,11 @@
   </dependencyManagement>
 
   <dependencies>
+<dependency>
+    <groupId>tools.jackson.core</groupId>
+    <artifactId>jackson-databind</artifactId>
+    <version>3.0.0</version>
+</dependency>
 <!-- Source: https://mvnrepository.com/artifact/org.projectlombok/lombok -->
 <dependency>
     <groupId>org.projectlombok</groupId>

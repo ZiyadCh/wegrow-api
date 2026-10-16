@@ -16,11 +16,11 @@ public class DepartementService {
     this.dRepository = dRepository;
   }
 
-  private void createDepartement(Departement departement) {
+  public void createDepartement(Departement departement) {
     dRepository.save(departement);
   }
 
-  private List<Object[]> listDepartements(Departement departement) {
+  public List<Object[]> listDepartements() {
     return dRepository.findAllWithEmployeeCount();
   }
 
