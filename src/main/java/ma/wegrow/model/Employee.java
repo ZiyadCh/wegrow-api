@@ -1,5 +1,6 @@
 package ma.wegrow.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -30,13 +31,14 @@ public class Employee {
   private Long id;
   private String nom;
   private String prenom;
+  @Column(unique = true)
   private String matricule;
   private String poste;
 
   @Enumerated(EnumType.STRING)
   private ContractType contractType;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.LAZY, optional = true)
   @JoinColumn(name = "departement_id")
   private Departement departement;
 }

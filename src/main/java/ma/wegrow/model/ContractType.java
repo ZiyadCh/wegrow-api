@@ -3,7 +3,7 @@ package ma.wegrow.model;
 /**
  * ContractType
  */
-enum ContractType {
+public enum ContractType {
   CDI,
   CDD,
   STAGE
