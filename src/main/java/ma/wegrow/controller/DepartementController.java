@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ma.wegrow.dto.DepartementsWithNbrEmpl;
 import ma.wegrow.dto.createDepartementRequest;
+import ma.wegrow.dto.createEmployeeRequest;
 import ma.wegrow.model.Departement;
+import ma.wegrow.model.Employee;
 import ma.wegrow.service.DepartementService;
 
 /**
@@ -48,4 +50,18 @@ class DepartementController {
     dService.deleteDepartement(id);
     return ResponseEntity.noContent().build();
   }
+
+  @PostMapping("/{id}/employee")
+  public ResponseEntity<Void> addEmployeetoDepartement(@PathVariable Long id,
+      @RequestBody createEmployeeRequest req) {
+    Employee employee = new Employee();
+    employee.setNom(req.nom());
+    employee.setPrenom(req.prenom());
+    employee.setMatricule(req.matricule());
+    employee.setPoste(req.poste());
+    employee.setContractType(req.contractType());
+    dService.addEmployeetoDepartement(id, employee);
+    return ResponseEntity.status(HttpStatus.CREATED).build();
+  }
+
 }

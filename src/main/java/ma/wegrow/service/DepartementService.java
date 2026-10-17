@@ -5,16 +5,20 @@ import java.util.Optional;
 
 import ma.wegrow.dto.DepartementsWithNbrEmpl;
 import ma.wegrow.model.Departement;
+import ma.wegrow.model.Employee;
 import ma.wegrow.repository.DepartementRepository;
+import ma.wegrow.repository.EmployeeRepository;
 
 /**
  * DepartementService
  */
 public class DepartementService {
   private final DepartementRepository dRepository;
+  private final EmployeeRepository employeeRepository;
 
-  public DepartementService(DepartementRepository dRepository) {
+  public DepartementService(DepartementRepository dRepository, EmployeeRepository employeeRepository) {
     this.dRepository = dRepository;
+    this.employeeRepository = employeeRepository;
   }
 
   public void createDepartement(Departement departement) {
@@ -34,6 +38,13 @@ public class DepartementService {
       throw new IllegalStateException("peut pas supprimer departement tant qu'ill a des employant!!");
     }
     dRepository.deleteById(departementId);
+  }
+
+  public void addEmployeetoDepartement(Long departementId, Employee employee) {
+    Departement departement = dRepository.findById(departementId)
+        .orElseThrow(() -> new IllegalArgumentException("Departement non trouve!!"));
+    employee.setDepartement(departement);
+    employeeRepository.save(employee);
   }
 
 }
