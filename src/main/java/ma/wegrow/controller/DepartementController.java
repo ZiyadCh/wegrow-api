@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ma.wegrow.dto.DepartementsWithNbrEmpl;
 import ma.wegrow.dto.createDepartementRequest;
+import ma.wegrow.dto.EmployeeDto;
 import ma.wegrow.dto.createEmployeeRequest;
 import ma.wegrow.model.Departement;
 import ma.wegrow.model.Employee;
@@ -62,6 +63,11 @@ class DepartementController {
     employee.setContractType(req.contractType());
     dService.addEmployeetoDepartement(id, employee);
     return ResponseEntity.status(HttpStatus.CREATED).build();
+  }
+
+  @GetMapping("/{id}/employee")
+  public List<EmployeeDto> listEmployees(@PathVariable Long id) {
+    return dService.listEmployees(id);
   }
 
 }

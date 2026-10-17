@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import ma.wegrow.dto.DepartementsWithNbrEmpl;
+import ma.wegrow.dto.EmployeeDto;
 import ma.wegrow.model.Departement;
 import ma.wegrow.model.Employee;
 import ma.wegrow.repository.DepartementRepository;
@@ -45,6 +46,13 @@ public class DepartementService {
         .orElseThrow(() -> new IllegalArgumentException("Departement non trouve!!"));
     employee.setDepartement(departement);
     employeeRepository.save(employee);
+  }
+
+  public List<EmployeeDto> listEmployees(Long departementId) {
+    return employeeRepository.findByDepartementId(departementId).stream()
+        .map(e -> new EmployeeDto(e.getId(), e.getNom(), e.getPrenom(), e.getMatricule(), e.getPoste(),
+            e.getContractType()))
+        .toList();
   }
 
 }
