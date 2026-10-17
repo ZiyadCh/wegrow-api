@@ -74,6 +74,7 @@
 
     <bean id="departementService" class="ma.wegrow.service.DepartementService">
         <constructor-arg ref="departementRepository"/>
+        <constructor-arg ref="employeeRepository"/>
     </bean>
 
 </beans>
