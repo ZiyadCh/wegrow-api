@@ -19,7 +19,7 @@ import ma.wegrow.service.DepartementService;
  * DepartementController
  */
 @RestController
-@RequestMapping("/departement")
+@RequestMapping("/api/departement")
 class DepartementController {
   private DepartementService dService;
 
